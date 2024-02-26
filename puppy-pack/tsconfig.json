@@ -3,12 +3,14 @@
   "extends": "expo/tsconfig.base",
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx", "app/Account/index.tsx",
   ],
   "baseUrl": ".",
   "paths": {
     "@/*": [
-      "src/*"
+      "app/*"
     ]
   }
 }
