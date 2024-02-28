@@ -1,41 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { addTheme } from '@tamagui/theme'
-import { H3, Square, Theme, YStack, XGroup, XStack, Button } from 'tamagui' //Button,
-
-
-
-
-type User = { 
-  email: string, 
-  password: string,
-};
+import { StyleSheet, Text, View, TextInput, Pressable, Image } from 'react-native';
+import { Button } from 'tamagui';
+import GoogleIcon from '../assets/icon-buttons/icons8-google-96.png';
+import { User } from '../interface/user';
 
 export default function LandingScreen({ navigation }) {
-  const [theme, setTheme] = useState<any>();
-  const [user, setUser] = useState<User>({ email: '', password: '' });
+  const [user, setUser] = useState<User>({ username: '', email: '',password: '' });
   const [session, setSession] = useState(false);
 
   const validateUser = () => {
     let isValid = true; 
-    if (user.email && user.password) {
+    if (user.username && user.password) {
       setSession(true);  
-      navigation.navigate('Account');
+      navigation.navigate('/account');
     }
-    if (user.password === '' || user.password === '') {
-      alert('Please enter a valid email or password');
-    }
-    if (user.email === '') {
-      alert('Please enter a valid email address or password');
+    if (user.username === '' || user.password === '') {
+      alert('Please enter a valid username or password');
     }
     return isValid; 
   }; 
 
   const signUp = () => {
-  
-
+    navigation.navigate('SignupScreen');
   };
 
   return (
@@ -49,16 +36,16 @@ export default function LandingScreen({ navigation }) {
       <View>
         <View style={styles.inputField}>
         <TextInput
-          placeholder="Email"
-          textContentType='emailAddress'
-          value={user.email}
-          onChangeText={( inputValue ) => setUser({ ...user, email: inputValue })}
+          placeholder="Username"
+          textContentType='username'
+          value={user.username}
+          onChangeText={( inputValue ) => setUser({ ...user, username: inputValue })}
           style={{fontSize: 15, height: 20}}
           />
         </View>
-        <View style={styles.inputField}>
+        <View style={[styles.inputField, {alignContent:'center', justifyContent:'center'}]}>
           <TextInput
-            placeholder="password"
+            placeholder="Password"
             textContentType='password'
             secureTextEntry={true}
             value={user.password}
@@ -68,13 +55,18 @@ export default function LandingScreen({ navigation }) {
         </View>
       </View>
       <View style={[{flexDirection: 'row'}, styles.buttons]}>
-      {/* <Button>Plain</Button> */}
-        <Button>Login</Button>
-        <Button>Join The Pack</Button>
-        {/* <Button
-          title="Sign Up"
-          onPress={() => signUp()}
-        /> */}
+        <View style={{right: 10}}>
+        <Button size="$6" onPress={() => validateUser()}>Login</Button>
+        </View>
+        <View>
+        <Button size="$6" onPress={() => signUp()}>Join The Pack</Button>
+        </View>
+      </View>
+      <Text> Or Sign In With...</Text>
+      <View style={[{flexDirection: 'row'}, styles.buttons]}>
+      <Button unstyled={true} style={{border: 'none', backgroundColor:'transparent'}}>
+      <Image source={GoogleIcon}/>
+      </Button>
       </View>
     </View>
 
@@ -109,7 +101,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     justifyContent: 'space-between',
-    margin: 10,
-    padding: 50,
+    margin: 20,
+    padding: 20,
   }
 });

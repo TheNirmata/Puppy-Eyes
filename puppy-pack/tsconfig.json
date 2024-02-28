@@ -5,7 +5,11 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
-    "**/*.jsx", "app/Account/index.tsx",
+    "**/*.jsx", "app/account/[user].tsx",
+    "**/*.svg", 
+    "**/*.png"
+
+
   ],
   "baseUrl": ".",
   "paths": {
