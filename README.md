@@ -79,7 +79,7 @@
 [![Sparkline](https://stars.medv.io/Naereen/badges.svg)](https://stars.medv.io/TheNirmata/badges)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-##Operating System
+## Operating System
   ![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 
 <!-- CONTACT -->
