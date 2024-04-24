@@ -22,10 +22,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center"> 🦮🐕‍🦺 🩷 Puppy Eyes 🩷 🐕🦴</h3>
 
   <p align="center">
-    Puppy Eyes
+    Sniff Sniff
     <br />
     <a href="https://github.com/github_username/repo_name"><strong> Explore the docs »</strong></a>
     <br />
@@ -63,10 +63,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
   ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
