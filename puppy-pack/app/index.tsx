@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { StyleSheet, Text, View, TextInput, Pressable, Image } from 'react-native';
+// import { useRouter, Link } from 'expo-router';
 import { Button } from 'tamagui';
 import GoogleIcon from '../assets/icon-buttons/icons8-google-96.png';
 import { User } from '../interface/user';
 
-export default function LandingScreen({ navigation }) {
+export default function LandingScreen() {
+  // const router = useRouter();
   const [user, setUser] = useState<User>({ username: '', email: '',password: '' });
   const [session, setSession] = useState(false);
 
@@ -13,7 +15,7 @@ export default function LandingScreen({ navigation }) {
     let isValid = true; 
     if (user.username && user.password) {
       setSession(true);  
-      navigation.navigate('/account');
+      // router.replace(`/account/${user.username}`);
     }
     if (user.username === '' || user.password === '') {
       alert('Please enter a valid username or password');
@@ -22,7 +24,7 @@ export default function LandingScreen({ navigation }) {
   }; 
 
   const signUp = () => {
-    navigation.navigate('SignupScreen');
+    // router.replace('/signup/');
   };
 
   return (
@@ -56,6 +58,7 @@ export default function LandingScreen({ navigation }) {
       </View>
       <View style={[{flexDirection: 'row'}, styles.buttons]}>
         <View style={{right: 10}}>
+        
         <Button size="$6" onPress={() => validateUser()}>Login</Button>
         </View>
         <View>

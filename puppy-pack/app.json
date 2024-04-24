@@ -15,19 +15,12 @@
     "ios": {
       "supportsTablet": true
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
     "web": {
       "bundler": "metro",
       "output": "static"
     },
     "plugins": [
       "expo-font",
-      "expo-router",
       "expo-splash-screen"
     ],
     "scheme": "puppy-pack-scheme"

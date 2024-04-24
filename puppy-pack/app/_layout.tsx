@@ -1,13 +1,14 @@
 //@ts-nocheck
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useColorScheme } from 'react-native'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import { SplashScreen, Stack } from 'expo-router';
+// import { SplashScreen, Stack } from 'expo-router';
 import { TamaguiProvider, Theme } from '@tamagui/core';
 import tamaguiConfig from '../tamagui.config';
-import AccountScreen from './account/[user]';
+
+import { UserProvider } from '../context/userContext';
 
 //use this bc AppLoading is depcreated 
 SplashScreen.preventAutoHideAsync();
@@ -22,7 +23,7 @@ export default () => {
 
   useEffect(() => {
     if (fontLoaded) {
-      SplashScreen.hideAsync();
+      // SplashScreen.hideAsync();
     }
   }, [fontLoaded]);
   
@@ -34,8 +35,10 @@ export default () => {
       <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ title: 'Puppy Pack', headerShown:false }} />
-        <Stack.Screen name="AccountScreen"  options={{ title: 'Account', headerShown:false }}/>
-        <Stack.Screen name="SignupScreen" options={{ headerShown:false }}/>
+        <UserProvider>
+        <Stack.Screen name="account"  options={{ title: 'Account', headerShown:false }}/>
+        </UserProvider>
+        <Stack.Screen name="signup" options={{ headerShown:false }}/>
       </Stack>
       </ThemeProvider>
     </TamaguiProvider>
