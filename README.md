@@ -49,11 +49,8 @@
     </li>
     </li>
     <li><a href="#usage">Funding</a></li>
-    ![Github-sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)
-    ![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">Operating System</a></li>
-    ![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -82,12 +79,19 @@
 [![Sparkline](https://stars.medv.io/Naereen/badges.svg)](https://stars.medv.io/TheNirmata/badges)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+##Operating System
+  ![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
+
 <!-- CONTACT -->
 ## Contact
 
 Your Name - Aimée Nguyen
 
 Project Link: [Puppy Eyes](https://github.com/TheNirmata/Puppy-Eyes)
+
+## Sponsor Me 
+  ![Github-sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)
+  ![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
