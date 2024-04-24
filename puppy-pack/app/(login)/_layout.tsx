@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-  inputContainer: {
+  inputField: {
     flexDirection: 'row',
     alignItems: 'center',
     width: 200,
