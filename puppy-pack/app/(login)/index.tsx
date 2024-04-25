@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Pressable, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Pressable, Image, TouchableOpacity, Linking } from 'react-native';
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import tw from 'twrnc';
 import  styles from './_layout';
-import AccountScreen from '../account/[username]';
+import { PasswordModal } from '../../components/modal/PasswordModal';
 import { User } from '../../interface/user';
 
 
@@ -14,7 +14,8 @@ import wolfPackGif from '../../assets/wolf-pack.gif';
 
 export default function LoginScreen({ navigation, route }) {
   const [user, setUser] = useState<User>({username: '', password: '', email:''});
-  // const { setUserToken } = route.params;
+  const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
+
   const {
     register,
     control,
@@ -33,12 +34,19 @@ export default function LoginScreen({ navigation, route }) {
     }
   };
 
-  return (
+  const handleModal = () => {
+    setIsPasswordModalVisible(true);
+  };
 
+  const closeModal = () => {
+    setIsPasswordModalVisible(false);
+  };
+
+  return (
     <View style={styles.container}>
       <View style={tw `flex flex-col gap-4 items-center justify-center`}>
         <Text  style={styles.headingText}>Puppy Eyes</Text>
-        <View style={tw `flex-col gap-4 m-10 items-center justify-center`}>
+        <View style={tw `flex-col gap-4 m-5 items-center justify-center`}>
         <Controller 
         control={control}
         rules={{
@@ -51,6 +59,7 @@ export default function LoginScreen({ navigation, route }) {
             onBlur={onBlur}
             value={value}
             placeholder='Username' 
+            placeholderTextColor='#af593e'
           />
         )}
         name="Username"
@@ -68,6 +77,7 @@ export default function LoginScreen({ navigation, route }) {
             onBlur={onBlur}
             value={value}
             placeholder='Password' 
+            placeholderTextColor='#af593e'
             secureTextEntry={true}
           />
         )}
@@ -75,9 +85,19 @@ export default function LoginScreen({ navigation, route }) {
       />
       {errors.password && <Text>Woof! password cannot be sniffed out</Text>}
         </View>
+
+        {/* FORGOT PASSWORD */}
+          <Pressable 
+            onPress={handleModal} > 
+            <Text style={{color:'blue'}}>Forgot Password?</Text>
+          </Pressable>
+
+          {isPasswordModalVisible && <PasswordModal open={isPasswordModalVisible} close={closeModal} />}
+    
+        {/* Login OR Sign up */}
         <View style={tw `flex-row items-center justify-center`}>
           <Pressable 
-            style={[styles.button, {width: 80, margin: 5 }]}
+            style={[styles.button, {width: 80, margin: 5}]}
             delayLongPress={1000}
             onPress={() => handleLogin({...user})}
             >
@@ -89,13 +109,12 @@ export default function LoginScreen({ navigation, route }) {
         </View>
       </View>
         <View>
-          <Text style={[styles.text, {margin: 30, padding: 10, color: '#4e4349'}, styles.text]}>Or Login With...</Text>
+          <Text style={[styles.text, {margin: 30, padding: 10}, styles.text]}>Or Login With...</Text>
       </View>
-      <TouchableOpacity style={{flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
-      <Image source={GoogleIcon} style={{ width: 80, height: 80, bottom: 20 }} />
-      <Image source={AppleIcon}  style={{ width: 70, height: 70, bottom: 25 }} />
-    </TouchableOpacity>
-      
+        <TouchableOpacity style={{flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
+          <Image source={GoogleIcon} style={{ width: 80, height: 80, bottom: 20 }} />
+          <Image source={AppleIcon}  style={{ width: 70, height: 70, bottom: 25 }} />
+      </TouchableOpacity>
     </View>
   );
 }

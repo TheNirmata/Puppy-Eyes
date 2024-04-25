@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff4ff',
+    backgroundColor: '#fff8fb'//'#fff4ff',
   },
   title: {
     fontSize: 20,
@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    color: '#af593e'
   },
   buttonText: {
-    color: 'white', 
+    color: '#af593e',//#ab4b52', 
     fontWeight:'bold', 
     fontSize: 15
   },
