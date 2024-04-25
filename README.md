@@ -90,9 +90,6 @@ Puppy Pack is a dog playmate finder application. Find your fury baby a friend to
   
   
 ## Contact
-  Developer: Aimée Nguyen
-  <a>
   [e-mail](aimeeeqnguyen@gmail.com)
-  </a>
   [upwork](https://www.upwork.com/freelancers/~01ac8008f295f28a44)
   
