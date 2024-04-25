@@ -1,57 +1,101 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { View, Form, Input, Button } from 'tamagui';
-import { Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, Pressable, Image, TouchableOpacity, Alert } from 'react-native';
+import { useForm, SubmitHandler, Controller } from "react-hook-form"
+import tw from 'twrnc';
 import  styles from './_layout';
-import GoogleIcon from '../../assets/icon-buttons/icons8-google-96.png';
 import AccountScreen from '../account/[username]';
 import { User } from '../../interface/user';
 
-export default function LoginScreen() {
-  const [username, password] = useState<User>({username: '', email: '', password:''});
 
-  const handleAuth = (user: User) =>{
-    if (!user) {
-      alert('Please enter a username and password');
-    }
-    if (user.username && !user.password) {
-      alert('Please enter a password');
-    }
-    if (!user.username && user.password) {
-      alert('Please enter a username');
-    }
-    if (user.username && user.password) {
-      alert('Welcome');
-    }
+const GoogleIcon = require('../../assets/icon-buttons/icons8-google-96.png');
+const AppleIcon = require('../../assets/icon-buttons/apple-icon.png');
+import wolfPackGif from '../../assets/wolf-pack.gif';
 
-    
+
+export default function LoginScreen({ navigation, route }) {
+  const [user, setUser] = useState<User>({username: '', password: '', email:''});
+  // const { setUserToken } = route.params;
+  const {
+    register,
+    control,
+    handleSubmit, 
+    formState: { errors }
+  } = useForm<User>({
+    defaultValues: {
+      username: '',
+      password: '',
+    }
+  });
+
+  const handleLogin = (user: User) =>{
+    if (user){
+      navigation.navigate('Account');
+    }
   };
+
   return (
-    <View>
-      <View style={styles.container}></View>
-      <View style={{alignItems:'center'}}>
-        <Form onSubmit={function (): void {
-          console.log('submitted');
 
-        }}>
-          <Input style={styles.inputField} placeholder="Username" />
-          <Input style={styles.inputField} placeholder="Password" />
-
-          <View style={{flexDirection: 'row', justifyContent:'space-between', padding: 10, margin: 10}}>
-          <Button>Login</Button>
-          <Button>Sign Up</Button>
-          </View>
-        </Form>
-      </View>
-      <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'center', margin: 20, padding: 20}}>
-        <Text>or login with...</Text>
+    <View style={styles.container}>
+      <View style={tw `flex flex-col gap-4 items-center justify-center`}>
+        <Text  style={styles.headingText}>Puppy Eyes</Text>
+        <View style={tw `flex-col gap-4 m-10 items-center justify-center`}>
+        <Controller 
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput 
+            style={[tw `w-20  border-red-200 rounded-md`, styles.inputField, {backgroundColor: 'white'}]} 
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            placeholder='Username' 
+          />
+        )}
+        name="Username"
+      />
+      {errors.username && <Text>Woof! Pup name not found!</Text>}
+      <Controller 
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput 
+            style={[tw `w-20  border-red-200 rounded-md`, styles.inputField, {backgroundColor: 'white'}]} 
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            placeholder='Password' 
+            secureTextEntry={true}
+          />
+        )}
+        name="Password"
+      />
+      {errors.password && <Text>Woof! password cannot be sniffed out</Text>}
         </View>
+        <View style={tw `flex-row items-center justify-center`}>
+          <Pressable 
+            style={[styles.button, {width: 80, margin: 5 }]}
+            delayLongPress={1000}
+            onPress={() => handleLogin({...user})}
+            >
+            <Text style={styles.buttonText}>Login</Text>
+          </Pressable>
+          <Pressable style={[styles.button, {width: 130}]}>
+            <Text style={styles.buttonText}>Get A Dogtag</Text>
+          </Pressable>
+        </View>
+      </View>
         <View>
-        <TouchableOpacity style={{flex: 1, flexDirection: 'column', alignItems:'center'}}>
-          <Image source={GoogleIcon} style={{ width: 80, height: 80 }} />
-        </TouchableOpacity>
-          </View>
+          <Text style={[styles.text, {margin: 30, padding: 10, color: '#4e4349'}, styles.text]}>Or Login With...</Text>
+      </View>
+      <TouchableOpacity style={{flexDirection: 'row', alignItems:'center', justifyContent:'center' }}>
+      <Image source={GoogleIcon} style={{ width: 80, height: 80, bottom: 20 }} />
+      <Image source={AppleIcon}  style={{ width: 70, height: 70, bottom: 25 }} />
+    </TouchableOpacity>
+      
     </View>
   );
 }
-

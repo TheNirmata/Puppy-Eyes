@@ -14,6 +14,9 @@ module.exports = function(api) {
       ['transform-inline-environment-variables', {
         include: 'TAMAGUI_TARGET',
       }],
+      ['babel-plugin-inline-import', {
+        extensions: ['.svg', '.png', '.jpg', '.jpeg', '.gif', '.ttf', '.otf']
+      }],
       'react-native-reanimated/plugin'
      ]
   };

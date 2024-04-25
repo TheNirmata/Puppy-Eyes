@@ -9,6 +9,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -20,9 +23,13 @@
       "output": "static"
     },
     "plugins": [
-      "expo-font",
+      ["expo-font",
+        {
+          "fonts":["app/(login)/assets/fonts/PixelCode.ttf"]
+        }],
       "expo-splash-screen"
     ],
-    "scheme": "puppy-pack-scheme"
+    "scheme": "puppy-pack-scheme",
+    "main": "index.js"
   }
 }

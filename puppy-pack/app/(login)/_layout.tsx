@@ -1,11 +1,10 @@
-import React from 'react';
-import { FontAwesome6 } from '@expo/vector-icons';
-import { StyleSheet, Pressable } from 'react-native';
+import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    margin: 60,
+    backgroundColor: '#fff4ff',
   },
   title: {
     fontSize: 20,
@@ -19,7 +18,8 @@ const styles = StyleSheet.create({
   inputField: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 200,
+    width: 250,
+    height: 60,
     margin: 10,
     padding: 10,
     borderWidth: 1,
@@ -28,13 +28,25 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
   },
+  buttonText: {
+    color: 'white', 
+    fontWeight:'bold', 
+    fontSize: 15
+  },
+  headingText: {
+    color: '#eec7db',
+    fontSize: 40,
+    fontWeight: 'bold',
+  },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#f4e0ea',
     color: 'white',
-    padding: 10,
+    padding: 15,
     borderRadius: 5,
     width: 100,
     textAlign: 'center',
+    justifyContent:'center', 
+    alignItems:'center'
   }
 });
 
