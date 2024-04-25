@@ -2,11 +2,11 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text } from 'react-native';
 
-export default function AccountScreen(){
+export default function AccountScreen({ route }){
+  const { user } = route.params;
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hi, </Text>
-      <Text>Hi</Text>
+      <Text>Hi, {user.username}</Text>
       <StatusBar style="auto" />
     </View>
   );

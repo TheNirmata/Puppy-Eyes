@@ -29,8 +29,15 @@ export default function LoginScreen({ navigation, route }) {
   });
 
   const handleLogin = (user: User) =>{
-    if (user){
-      navigation.navigate('Account');
+    if (user.username && user.password){
+      setUser(
+        {
+          username: user.username,
+          password: user.password,
+          email: user.email
+        }
+      )
+      navigation.navigate('Account',{user: user});
     }
   };
 
@@ -99,7 +106,7 @@ export default function LoginScreen({ navigation, route }) {
           <Pressable 
             style={[styles.button, {width: 80, margin: 5}]}
             delayLongPress={1000}
-            onPress={() => handleLogin({...user})}
+            onPress={() => handleSubmit(handleLogin({...user}))}
             >
             <Text style={styles.buttonText}>Login</Text>
           </Pressable>
