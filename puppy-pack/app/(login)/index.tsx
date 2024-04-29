@@ -28,18 +28,49 @@ export default function LoginScreen({ navigation, route }) {
     }
   });
 
-  const handleLogin = (user: User) =>{
-    if (user.username && user.password){
-      setUser(
-        {
-          username: user.username,
-          password: user.password,
-          email: user.email
-        }
-      )
-      navigation.navigate('Account',{user: user});
-    }
-  };
+  useEffect(()=>{
+    fetch('http://127.0.0.1:8000/PuppyApi/woof/login', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+  },[]);
+
+  // const handleLogin = async(user: User): Promise<any> =>{
+  //   try {
+  //     if (!user.username || !user.password){
+  //       alert('Please enter a username or password')
+  //     }
+  //     if (user.username && user.password){
+  //       const response = await fetch(`http://localhost:8000/PuppyApi/woof/${user.username}`, {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           username: user.username,
+  //           password: user.password,
+  //         }),
+  //       });
+  //       const data = await response.json();
+
+  //       if (data.status === 200) {
+  //         setUser({
+  //           username: user.username,
+  //           password: user.password,
+  //           email: user.email
+  //         });
+  //         navigation.navigate('Account',{user: user});
+  //       }
+  //     return Promise.resolve();
+  //     }
+  //   }catch(error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleModal = () => {
     setIsPasswordModalVisible(true);
@@ -69,7 +100,7 @@ export default function LoginScreen({ navigation, route }) {
             placeholderTextColor='#af593e'
           />
         )}
-        name="Username"
+        name="username"
       />
       {errors.username && <Text>Woof! Pup name not found!</Text>}
       <Controller 
@@ -88,7 +119,7 @@ export default function LoginScreen({ navigation, route }) {
             secureTextEntry={true}
           />
         )}
-        name="Password"
+        name="password"
       />
       {errors.password && <Text>Woof! password cannot be sniffed out</Text>}
         </View>

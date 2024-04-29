@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv('../../.env')
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path('../../.env').resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -21,6 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-9go(__j^^76gds=!ay^4muy0433h#k8qyshyk_jl&42=t14q$+'
+PGUSER = os.getenv('PGUSER')
+PGDTATBASE = os.getenv('PGDTATBASE')
+PGPASSWORD = os.getenv('PGPASSWORD')
+PGHOST = os.getenv('PGHOST')
+PGPORT = os.getenv('PGPORT')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'PuppyApi'
+    'rest_framework',
+    'PuppyApi',
 ]
 
 MIDDLEWARE = [
@@ -74,13 +84,22 @@ WSGI_APPLICATION = 'PuppyPackServer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': PGDTATBASE,
+        'USER': PGUSER,
+        'PASSWORD': PGPASSWORD,
+        'HOST': PGHOST,
+        'PORT': PGPORT,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
