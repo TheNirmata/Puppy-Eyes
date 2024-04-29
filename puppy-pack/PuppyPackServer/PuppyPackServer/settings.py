@@ -12,24 +12,19 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv('../../.env')
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = Path('../../.env').resolve().parent.parent
 
+#Load .env file
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-9go(__j^^76gds=!ay^4muy0433h#k8qyshyk_jl&42=t14q$+'
-PGUSER = os.getenv('PGUSER')
-PGDTATBASE = os.getenv('PGDTATBASE')
-PGPASSWORD = os.getenv('PGPASSWORD')
-PGHOST = os.getenv('PGHOST')
-PGPORT = os.getenv('PGPORT')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -92,12 +87,12 @@ WSGI_APPLICATION = 'PuppyPackServer.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': PGDTATBASE,
-        'USER': PGUSER,
-        'PASSWORD': PGPASSWORD,
-        'HOST': PGHOST,
-        'PORT': PGPORT,
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('PGDATABASE'),
+        'USER': os.getenv('PGUSER'),
+        'PASSWORD': os.getenv('PGPASSWORD'),
+        'HOST': os.getenv('PGHOST'),
+        'PORT': os.getenv('PGPORT'),
     }
 }
 

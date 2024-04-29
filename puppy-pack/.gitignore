@@ -35,3 +35,12 @@ yarn-error.*
 *.tsbuildinfo
 
 .env
+.venv
+
+# misc
+*.log
+*.sqlite
+*.md
+*.yml
+*.yaml
+*.json
