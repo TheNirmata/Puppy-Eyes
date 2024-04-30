@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import AccountScreen from './app/account/[username]';
 import LoginScreen from './app/(login)/index';
+import SignupScreen from './app/signup/index';
+import Layout from './_layout';
 import * as Font from 'expo-font'
 import { UserContextProvider } from '../puppy-pack/context/userContext';
 
@@ -27,6 +29,7 @@ const token = () => {
 };
 
 
+
 export default function App() {
   const [fontsLoaded] = Font.useFonts({
     PixelCode: PixelCode
@@ -45,14 +48,38 @@ export default function App() {
   }
 
   return (  
+    // <Layout>
     <NavigationContainer>
       <UserContextProvider>
         <Stack.Navigator>
-            <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false }}/>
-            <Stack.Screen name="Account" component={AccountScreen} options={{headerShown: false}}/>
+            <Stack.Screen 
+              name="Login" 
+              component={LoginScreen} 
+              options={{
+                headerShown: false,
+                cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+              }}
+              />
+            <Stack.Screen 
+              name="Account" 
+              component={AccountScreen} 
+              options={{
+                headerShown: false,
+                cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+              }}
+              />
+            <Stack.Screen 
+              name="GetADogTag" 
+              component={SignupScreen} 
+              options={{
+                headerShown: false,
+                cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+              }}
+              />
         </Stack.Navigator>
         <StatusBar style="auto" />
       </UserContextProvider>
     </NavigationContainer>
+  // </Layout>
   );
 };
