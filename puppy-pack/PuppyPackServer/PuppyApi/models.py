@@ -1,6 +1,8 @@
+#model by django automatically makes tables in neon (postgresql)
 from django.db import models
 
 # Create your models here.
+#human
 class Onwer(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -14,7 +16,7 @@ class Onwer(models.Model):
 
     def __str__(self):
         return self.name
-
+#dog
 class Pup(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)

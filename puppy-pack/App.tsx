@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AccountScreen from './app/account/[username]';
 import LoginScreen from './app/(login)/index';
 import * as Font from 'expo-font'
-
+import { UserContextProvider } from '../puppy-pack/context/userContext';
 
 const Stack = createStackNavigator();
 const PixelCode = require('./assets/fonts/PixelCode.ttf');
@@ -27,8 +27,7 @@ const token = () => {
 };
 
 
-export default function App(): React.ReactComponentElement<any> {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+export default function App() {
   const [fontsLoaded] = Font.useFonts({
     PixelCode: PixelCode
   });
@@ -47,11 +46,13 @@ export default function App(): React.ReactComponentElement<any> {
 
   return (  
     <NavigationContainer>
-          <Stack.Navigator>
+      <UserContextProvider>
+        <Stack.Navigator>
             <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false }}/>
             <Stack.Screen name="Account" component={AccountScreen} options={{headerShown: false}}/>
-          </Stack.Navigator>
-          <StatusBar style="auto" />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </UserContextProvider>
     </NavigationContainer>
   );
 };

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Pressable, Image, TouchableOpacity, Linking } from 'react-native';
-import { useForm, SubmitHandler, Controller } from "react-hook-form"
+//@ts-nocheck
+import React, { useState, useContext } from 'react';
+import { View, Text, TextInput, Button, Pressable, Image, TouchableOpacity } from 'react-native';
+import { useForm, Controller } from "react-hook-form"
 import tw from 'twrnc';
 import  styles from './_layout';
 import { PasswordModal } from '../../components/modal/PasswordModal';
 import { User } from '../../interface/user';
-
+import  { UserContext }  from '../../context/userContext';
 
 const GoogleIcon = require('../../assets/icon-buttons/icons8-google-96.png');
 const AppleIcon = require('../../assets/icon-buttons/apple-icon.png');
@@ -13,7 +14,7 @@ import wolfPackGif from '../../assets/wolf-pack.gif';
 
 
 export default function LoginScreen({ navigation, route }) {
-  const [user, setUser] = useState<User>({username: '', password: '', email:''});
+  const { user, handleLogin } = useContext(UserContext);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
 
   const {
@@ -27,50 +28,16 @@ export default function LoginScreen({ navigation, route }) {
       password: '',
     }
   });
+  const onSubmit = data => {
+    handleLogin(data);
+    console.log({data});
+    
+  };
 
-  useEffect(()=>{
-    fetch('http://127.0.0.1:8000/PuppyApi/woof/login', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-  },[]);
-
-  // const handleLogin = async(user: User): Promise<any> =>{
-  //   try {
-  //     if (!user.username || !user.password){
-  //       alert('Please enter a username or password')
-  //     }
-  //     if (user.username && user.password){
-  //       const response = await fetch(`http://localhost:8000/PuppyApi/woof/${user.username}`, {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({
-  //           username: user.username,
-  //           password: user.password,
-  //         }),
-  //       });
-  //       const data = await response.json();
-
-  //       if (data.status === 200) {
-  //         setUser({
-  //           username: user.username,
-  //           password: user.password,
-  //           email: user.email
-  //         });
-  //         navigation.navigate('Account',{user: user});
-  //       }
-  //     return Promise.resolve();
-  //     }
-  //   }catch(error) {
-  //     console.error(error);
-  //   }
-  // };
+  const login = (userInput: User) =>{
+    handleLogin(userInput);
+    // navigation.navigate('Account',{user: user});
+  };
 
   const handleModal = () => {
     setIsPasswordModalVisible(true);
@@ -85,6 +52,7 @@ export default function LoginScreen({ navigation, route }) {
       <View style={tw `flex flex-col gap-4 items-center justify-center`}>
         <Text  style={styles.headingText}>Puppy Eyes</Text>
         <View style={tw `flex-col gap-4 m-5 items-center justify-center`}>
+          {/* <form onSubmit={}></form> */}
         <Controller 
         control={control}
         rules={{
@@ -93,7 +61,7 @@ export default function LoginScreen({ navigation, route }) {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput 
             style={[tw `w-20  border-red-200 rounded-md`, styles.inputField, {backgroundColor: 'white'}]} 
-            onChange={onChange}
+            onChangeText={onChange}
             onBlur={onBlur}
             value={value}
             placeholder='Username' 
@@ -111,7 +79,7 @@ export default function LoginScreen({ navigation, route }) {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput 
             style={[tw `w-20  border-red-200 rounded-md`, styles.inputField, {backgroundColor: 'white'}]} 
-            onChange={onChange}
+            onChangeText={onChange}
             onBlur={onBlur}
             value={value}
             placeholder='Password' 
@@ -134,13 +102,15 @@ export default function LoginScreen({ navigation, route }) {
     
         {/* Login OR Sign up */}
         <View style={tw `flex-row items-center justify-center`}>
+          {/* Login */}
           <Pressable 
             style={[styles.button, {width: 80, margin: 5}]}
             delayLongPress={1000}
-            onPress={() => handleSubmit(handleLogin({...user}))}
+            onPress={handleSubmit(onSubmit)}
             >
             <Text style={styles.buttonText}>Login</Text>
           </Pressable>
+          {/* Signup */}
           <Pressable style={[styles.button, {width: 130}]}>
             <Text style={styles.buttonText}>Get A Dogtag</Text>
           </Pressable>

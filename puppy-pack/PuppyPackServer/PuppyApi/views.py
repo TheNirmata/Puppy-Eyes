@@ -9,3 +9,9 @@ def Woof(request):
   return JsonResponse({
     'message': 'Bark, Bark from Django!',
   })
+  
+#login view 
+def login(request):
+  return JsonResponse({
+    'message': 'Woof Login',
+  })
