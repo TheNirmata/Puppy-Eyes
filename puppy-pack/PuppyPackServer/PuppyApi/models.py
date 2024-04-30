@@ -21,3 +21,5 @@ class Pup(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
     bio = models.TextField()
+
+#sample user 
