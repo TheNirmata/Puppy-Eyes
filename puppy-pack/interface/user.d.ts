@@ -2,6 +2,9 @@ export type User = {
   username: string | null, 
   password: string | null, 
   email?: string | null, 
+  phone: string | null,
+  firstname: string | null,
+  lastname: string | null,
 };
 
 

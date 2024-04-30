@@ -1,4 +1,12 @@
-import { StyleSheet } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';React
+const Layout = ({ children }) => (
+  <View
+  style={styles.container}
+  >
+    { children }
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -39,7 +47,6 @@ const styles = StyleSheet.create({
     color: '#eec7db',
     fontSize: 40,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
   button: {
     backgroundColor: '#f4e0ea',
@@ -54,4 +61,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default styles;
+export default Layout;

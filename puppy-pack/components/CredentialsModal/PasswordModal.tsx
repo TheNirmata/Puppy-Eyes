@@ -7,6 +7,7 @@ import { User } from '../../interface/user';
 
 export const PasswordModal = ({ open, close }) => {
   const [confirm, setConfirm] = useState(false);
+  //@ts-ignore
   const [email, setEmail] = useState<User>({username: '', password:'', email: ''});
   const [isLoading, setIsLoading] = useState(false);
 
