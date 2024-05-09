@@ -5358,9 +5358,9 @@ var require_isWebColor = __commonJS({
   }
 });
 
-// node_modules/react-native-web/node_modules/@react-native/normalize-colors/index.js
+// node_modules/@react-native/normalize-colors/index.js
 var require_normalize_colors = __commonJS({
-  "node_modules/react-native-web/node_modules/@react-native/normalize-colors/index.js"(exports2, module2) {
+  "node_modules/@react-native/normalize-colors/index.js"(exports2, module2) {
     "use strict";
     function normalizeColor(color2) {
       if (typeof color2 === "number") {
