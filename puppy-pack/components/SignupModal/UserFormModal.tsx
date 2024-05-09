@@ -41,7 +41,7 @@ const UserFormModal = ({ show, setShow }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
            <View>
-            <Text style={styles.modalText}>Get Your Dogtag</Text>
+            <Text style={[styles.modalText, {color: '#eec7db'}]}>Get Your Dogtag</Text>
            </View>
             <ScrollView>
             <View style={ tw `gap-5`}>
