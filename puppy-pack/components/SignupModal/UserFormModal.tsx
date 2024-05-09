@@ -41,11 +41,10 @@ const UserFormModal = ({ show, setShow }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
            <View>
-            <Text style={styles.modalText}>User Form</Text>
-
+            <Text style={styles.modalText}>Get Your Dogtag</Text>
            </View>
             <ScrollView>
-            <View style={tw `flex flex-col m-10 p-5`}>
+            <View style={ tw `gap-5`}>
               <Controller
                 control={control}
                 rules={{
@@ -53,7 +52,7 @@ const UserFormModal = ({ show, setShow }) => {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-40 p-2 m-5 rounded-lg`}
+                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
                   placeholder='First name: '
                   onBlur={onBlur}
                   onChangeText={onChange}
@@ -69,7 +68,7 @@ const UserFormModal = ({ show, setShow }) => {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-40 p-2 m-5 rounded-lg`}
+                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
                   placeholder='Last name:'
                   onBlur={onBlur}
                   onChangeText={onChange}
@@ -85,7 +84,7 @@ const UserFormModal = ({ show, setShow }) => {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-40 p-2 m-5 rounded-lg`}
+                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
                   placeholder='Email: '
                   onBlur={onBlur}
                   onChangeText={onChange}
@@ -101,7 +100,23 @@ const UserFormModal = ({ show, setShow }) => {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-40 p-2 m-5 rounded-lg`}
+                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
+                  placeholder='Confirm Email: '
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  />
+                )}
+                name='email'
+                />
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
                   placeholder='Password:'
                   onBlur={onBlur}
                   onChangeText={onChange}
@@ -110,6 +125,22 @@ const UserFormModal = ({ show, setShow }) => {
                 )}
                 name='password'
                 />
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
+                  placeholder='Confirm Password:'
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  />
+                )}
+                name='password'
+                />                
               </View>
             </ScrollView>
           </View>
@@ -127,15 +158,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign:'left',
     backgroundColor: '#fff8fb',
   },
   modalView: {
     width: '95%',
-    margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -148,7 +178,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold'
   }
 });
