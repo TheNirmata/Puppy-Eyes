@@ -6,16 +6,7 @@ import { User } from '../../interface/user';
 import UserFormModal from './UserFormModal';
 
 const WelcomeModel = ({ showWelcomeModal, setShowWelcomeModal }) => {
-  const [confirmed, iscConfirmed] = useState(true);
   const [getStarted, setGetStarted] = useState(false);
-  const [user, setUser] = useState<User>({
-    username: '',
-    password: '',
-    email: '',
-    phone: '',
-    firstname: '',
-    lastname: '',
-  }); 
 
   const handleInfo = () => {
     setGetStarted(true);

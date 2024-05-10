@@ -34,6 +34,7 @@ const UserFormModal = ({ show, setShow }) => {
 
   const onSubmit = data => {
     console.log({data});
+    //@ts-expect-error
     navigation.navigate('Account',{user: user});
   };
 
@@ -50,6 +51,11 @@ const UserFormModal = ({ show, setShow }) => {
            <View>
             <Text style={[styles.modalText, {color: '#eec7db'}]}>Get Your Dogtag</Text>
            </View>
+           
+           <View style={tw `items-center`}>
+            <Text style={{color: '#eec7db'}}>Enter your Human's Information</Text>
+           </View>
+
            <View>
             <ScrollView>
               <Controller 
@@ -187,7 +193,7 @@ const UserFormModal = ({ show, setShow }) => {
                   onSubmit(user);
                 }}
                 >
-                <Text style={{color: '#b29700', fontWeight:'bold', fontSize: 15}}>Sign Up</Text>
+                <Text style={{color: '#b29700', fontWeight:'bold', fontSize: 15}}>Next</Text>
               </Pressable>
             </View>
           </View>
