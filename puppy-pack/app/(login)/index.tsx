@@ -1,6 +1,6 @@
 //@ts-nocheck
-import React, { useState, useContext, BaseSyntheticEvent } from 'react';
-import { View, Text, TextInput, Button, Pressable, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, TextInput, Pressable, Image, TouchableOpacity } from 'react-native';
 import { useForm, Controller } from "react-hook-form"
 import tw from 'twrnc';
 import  styles from './_layout';
@@ -14,7 +14,7 @@ import wolfPackGif from '../../assets/wolf-pack.gif';
 
 
 export default function LoginScreen({ navigation }) {
-  const { user, handleLogin } = useContext(UserContext);
+  const { user, setUser, handleLogin } = useContext(UserContext);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
 
   const {
@@ -35,7 +35,7 @@ export default function LoginScreen({ navigation }) {
     
   };
   const handleModal = () => {
-    setIsPasswordModalVisible(true);r
+    setIsPasswordModalVisible(true);
   };
 
   const closeModal = () => {
@@ -60,7 +60,10 @@ export default function LoginScreen({ navigation }) {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput 
             style={[tw `w-20  border-red-200 rounded-md`, styles.inputField, {backgroundColor: 'white'}]} 
-            onChangeText={onChange}
+            onChangeText={input =>{
+              onChange(input);
+              setUser({...user, username: input});
+            }}
             onBlur={onBlur}
             value={value}
             placeholder='Username' 
@@ -78,7 +81,10 @@ export default function LoginScreen({ navigation }) {
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput 
             style={[tw `w-20  border-red-200 rounded-md`, styles.inputField, {backgroundColor: 'white'}]} 
-            onChangeText={onChange}
+            onChangeText={input =>{
+              onChange(input);
+              setUser({...user, password: input});
+            }}
             onBlur={onBlur}
             value={value}
             placeholder='Password' 

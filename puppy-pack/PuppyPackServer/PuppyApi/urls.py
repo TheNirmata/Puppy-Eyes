@@ -6,4 +6,5 @@ from .views import Woof
 urlpatterns = [
     path('woof/', Woof),
      path('woof/login', Woof),
+     path('woof/CreateDogTag', Woof),
 ]
