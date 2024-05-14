@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Modal, StyleSheet, Text, TextInput, View, Pressable } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from 'react-native-gesture-handler';

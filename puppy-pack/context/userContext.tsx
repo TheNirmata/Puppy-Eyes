@@ -26,7 +26,7 @@ export const UserContextProvider: React.FC = ({ children }: any) => {
         alert('Please enter a username or password')
       }
       if (userInput.username && userInput.password){
-        const response = await fetch(`http://localhost:8000/PuppyApi/woof/${userInput.username}`, {
+        const response = await fetch(`http://localhost:8000/PuppyApi/login/${userInput.username}/`, {
           method: 'POST', // Change to POST
           headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,6 @@ export const UserContextProvider: React.FC = ({ children }: any) => {
             password: userInput.password,
             email: userInput.email,
             phone: userInput.phone,
-            // userInput
           }),
         });
 
