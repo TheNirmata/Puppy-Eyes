@@ -4,7 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 
-  <h1 align="center">🩷 Puppy Pack 🩷</h1>
+  <h1 align="center">🩷 Puppy Eyes 🩷</h1>
   <p align="center">
    Sniff Sniff
     <br />
