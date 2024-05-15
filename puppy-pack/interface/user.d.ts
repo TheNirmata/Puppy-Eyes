@@ -12,4 +12,5 @@ export type UserContextType = {
   user: User | null,
   setUser: (user: User) => void,
   handleLogin: (userInput: User, event?: BaseSyntheticEvent) => Promise<void>,
+  handleSignup: (userInput: User, event?: BaseSyntheticEvent) => Promise<void>,
 };

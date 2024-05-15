@@ -1,19 +1,16 @@
-import React from 'react';
-import { Modal, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useContext } from 'react';
+import { Modal, StyleSheet, Text, TextInput, View, Pressable } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
-import { User } from '../../interface/user';
-import tw from 'twrnc';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import tw from 'twrnc';
+import { User } from '../../interface/user';
+import { UserContext } from '../../context/userContext';
 
 const UserFormModal = ({ show, setShow }) => {
-  const [user, setUser] = React.useState<User>({
-    username: '',
-    password: '',
-    email: '',
-    phone: '',
-    firstname: '',
-    lastname: '',
-  });
+  const { user, setUser, handleSignup } = useContext(UserContext);
+  const navigation = useNavigation();
+
   const {
     register,
     control,
@@ -30,6 +27,17 @@ const UserFormModal = ({ show, setShow }) => {
     }
   });
 
+  const handleMainScreen = () => {
+    //@ts-expect-error
+    navigation.navigate('Login');
+  };
+
+  const onSubmit = data => {
+    console.log({data});
+    //@ts-expect-error
+    navigation.navigate('Account',{user: user});
+  };
+
   return (
     <View>
       <Modal
@@ -41,108 +49,153 @@ const UserFormModal = ({ show, setShow }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
            <View>
-            <Text style={styles.modalText}>Get Your Dogtag</Text>
+            <Text style={[styles.modalText, {color: '#eec7db'}]}>Get Your Dogtag</Text>
            </View>
+           
+           <View style={tw `items-center`}>
+            <Text style={{color: '#eec7db'}}>Enter your Human's Information</Text>
+           </View>
+
+           <View>
             <ScrollView>
-            <View style={ tw `gap-5`}>
-              <Controller
+              <Controller 
                 control={control}
                 rules={{
                   required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
-                  placeholder='First name: '
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
+                    style={tw `border border-gray-400 p-3 m-3 w-80`}
+                    placeholder='First Name'
+                    onBlur={onBlur}
+                    onChangeText={text => {
+                      onChange(text); // This updates the form state managed by react-hook-form
+                      setUser({...user, firstname: text}); // This updates local user state
+                    }}
+                    value={value}
                   />
                 )}
                 name='firstname'
-                />
-              <Controller
+              />
+              <Controller 
                 control={control}
                 rules={{
                   required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
-                  placeholder='Last name:'
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
+                    style={tw `border border-gray-400 p-3 m-3 w-80`}
+                    placeholder='Last Name'
+                    onBlur={onBlur}
+                    onChangeText={text => {
+                      onChange(text); // This updates the form state managed by react-hook-form
+                      setUser({...user, lastname: text}); // This updates local user state
+                    }}
+                    value={value}
                   />
                 )}
                 name='lastname'
-                />
-              <Controller
+              />
+              <Controller 
                 control={control}
                 rules={{
                   required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
-                  placeholder='Email: '
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
+                    style={tw `border border-gray-400 p-3 m-3 w-80`}
+                    placeholder='Username'
+                    onBlur={onBlur}
+                    onChangeText={text => {
+                      onChange(text); // This updates the form state managed by react-hook-form
+                      setUser({...user, username: text}); // This updates local user state
+                    }}
+                    value={value}
                   />
                 )}
-                name='email'
-                />
-              <Controller
+                name='username'
+              />
+              <Controller 
                 control={control}
                 rules={{
                   required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
-                  placeholder='Confirm Email: '
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  />
-                )}
-                name='email'
-                />
-              <Controller
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
-                  placeholder='Password:'
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
+                    style={tw `border border-gray-400 p-3 m-3 w-80`}
+                    placeholder='Password'
+                    secureTextEntry={true}
+                    onBlur={onBlur}
+                    onChangeText={text => {
+                      onChange(text); // This updates the form state managed by react-hook-form
+                      setUser({...user, password: text}); // This updates local user state
+                    }}
+                    value={value}
                   />
                 )}
                 name='password'
-                />
-              <Controller
+              />
+              <Controller 
                 control={control}
                 rules={{
                   required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
-                  style={tw `color-black w-95 p-2 m-5 rounded-lg`}
-                  placeholder='Confirm Password:'
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
+                    style={tw `border border-gray-400 p-3 m-3 w-80`}
+                    placeholder='Email'
+                    onBlur={onBlur}
+                    onChangeText={text => {
+                      onChange(text); // This updates the form state managed by react-hook-form
+                      setUser({...user, email: text}); // This updates local user state
+                    }}
+                    value={value}
                   />
                 )}
-                name='password'
-                />                
-              </View>
+                name='email'
+              />
+              <Controller 
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={tw `border border-gray-400 p-3 m-3 w-80`}
+                    placeholder='Phone'
+                    onBlur={onBlur}
+                    onChangeText={text => {
+                      onChange(text); // This updates the form state managed by react-hook-form
+                      setUser({...user, phone: text}); // This updates local user state
+                    }}
+                    value={value}
+                  />
+                )}
+                name='phone'
+              />
+
+
             </ScrollView>
+           </View>
+            <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
+            <Pressable
+                style={styles.buttons}
+                onPress={handleMainScreen}
+                >
+                <Text style={{color: '#b29700', fontWeight:'bold', fontSize: 15}}>Cancel</Text>
+              </Pressable>
+
+              <Pressable
+                style={styles.buttons}
+                onPress={async () => {
+                  //@ts-expect-error
+                  await handleSubmit(handleSignup(user));
+                  onSubmit(user);
+                }}
+                >
+                <Text style={{color: '#b29700', fontWeight:'bold', fontSize: 15}}>Next</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -180,5 +233,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold'
+  },
+  buttons: {
+    backgroundColor: '#f4e0ea',     
+    padding: 15,
+    borderRadius: 5,
+    width: 100,
+    justifyContent:'center',
+    margin: 5,
+    alignItems:'center',
   }
 });
