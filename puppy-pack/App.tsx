@@ -14,10 +14,6 @@ import { UserContextProvider } from '../puppy-pack/context/userContext';
 const Stack = createStackNavigator();
 const PixelCode = require('./assets/fonts/PixelCode.ttf');
 
-// import { TamaguiProvider } from "tamagui";
-// import config from "./tamagui.config";
-{/* <TamaguiProvider config={config}> */}
-{/* </TamaguiProvider> */}
 
 const token = () => {
   return(
