@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
+import os
 from pathlib import Path
 from dotenv import load_dotenv
 from os import getenv
 from django.core.cache import cache
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'PuppyApi',
+    'corsheaders',
+    'rest_framework.authtoken',
+    # 'django_nextjs.apps.DjangoNextJSConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'PuppyPackServer.urls'
@@ -142,3 +148,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# next.js
+# DJANGO_NEXTJS = {
+#     'ROOT_DIR': BASE_DIR / 'puppy-pack',
+#     'BUILD_DIR': BASE_DIR / 'puppy-pack' / 'build',
+#     'STATIC_DIR': BASE_DIR / 'puppy-pack' / 'build' / 'static',
+#     'STATIC_URL': '/static/',
+# }
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    # 'http://your-production-url.com',
+]

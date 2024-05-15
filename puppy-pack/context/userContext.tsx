@@ -27,12 +27,12 @@ export const UserContextProvider: React.FC = ({ children }: any) => {
       }
       if (userInput.username && userInput.password){
         const response = await fetch(`http://localhost:8000/PuppyApi/login/${userInput.username}/`, {
-          method: 'POST', // Change to POST
+          method: 'GET', // Change to POST
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            username: userInput.username,
+            username: userInput.username.toLowerCase(),
             password: userInput.password,
           }),
         });
@@ -55,17 +55,17 @@ export const UserContextProvider: React.FC = ({ children }: any) => {
         alert('Please enter a username or password')
       }
       if (userInput.username && userInput.password){
-        const response = await fetch(`http://localhost:8000/PuppyApi/woof/CreateDogTag`, {
+        const response = await fetch(`/PuppyApi/woof/CreateDogTag`, {
           method: 'POST', // Change to POST
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            firstname: userInput.firstname,
-            lastname: userInput.lastname,
+            firstname: userInput.firstname.toLowerCase(),
+            lastname: userInput.lastname.toLowerCase(),
             username: userInput.username,
             password: userInput.password,
-            email: userInput.email,
+            email: userInput.email.toLowerCase(),
             phone: userInput.phone,
           }),
         });
