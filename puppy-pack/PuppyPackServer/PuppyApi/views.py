@@ -10,6 +10,7 @@ import json
 
 
 from django.contrib.auth import get_user_model, login, authenticate
+from rest_framework.decorators import api_view
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -22,9 +23,12 @@ from django.contrib.auth import authenticate
 
   
 # welcome view
+@api_view(['GET'])
 def Woof(request): 
+  data = request.data
   return JsonResponse({
     'message': 'Bark, Bark from Django!',
+    'data': data
   })
     
 #login view 
@@ -58,7 +62,11 @@ class CreateUserView(CreateAPIView):
     return Response({'token': token.key}, status=status.HTTP_201_CREATED)
     
   def perform_create(self, serializer):
-    serializer.save()
+    # if user exists 
+    if PupParent.objects.filter(username=serializer.validated_data.get('username')).exists():
+      return Response(serializer.ValidationError("Username is already taken."), status=status.HTTP_400_BAD_REQUEST)
+    else:
+      serializer.save()
   
 # login 
 class LoginView(APIView):  

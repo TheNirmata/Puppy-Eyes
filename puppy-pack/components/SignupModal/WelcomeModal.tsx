@@ -15,7 +15,7 @@ const WelcomeModel = ({ showWelcomeModal, setShowWelcomeModal }) => {
   };
 
   return (
-    <View style={tw `flex flex-center m-4`}>
+    <View style={tw `flex m-4`}>
       <Modal
         animationType="fade"
         transparent={true}

@@ -27,9 +27,10 @@ export const UserContextProvider: React.FC = ({ children }: any) => {
       }
       if (userInput.username && userInput.password){
         const response = await fetch(`http://localhost:8000/PuppyApi/login/${userInput.username}/`, {
-          method: 'POST', // Change to POST
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
           body: JSON.stringify({
             username: userInput.username.toLowerCase(),
@@ -56,9 +57,10 @@ export const UserContextProvider: React.FC = ({ children }: any) => {
       }
       if (userInput.username && userInput.password){
         const response = await fetch(`http://localhost:8000/PuppyApi/woof/CreateDogTag`, {
-          method: 'POST', // Change to POST
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
           body: JSON.stringify({
             firstname: userInput.firstname.toLowerCase(),
@@ -70,8 +72,11 @@ export const UserContextProvider: React.FC = ({ children }: any) => {
           }),
         });
 
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
         const data = await response.json();
-  
+        
         if (data.status === 200) {
           setUser(data.user);
           console.log('Woof! Successfully signed up!');
