@@ -13,41 +13,13 @@ import UserFormModal from '../../components/SignupModal/UserFormModal';
 export default function SignupScreen(){
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [showUserFormModal, setShowUserFormModal] = useState(false);
-  // const [user, setUser] = React.useState<User>({
-  //   username: '',
-  //   password: '',
-  //   email: '',
-  //   phone: '',
-  //   firstname: '',
-  //   lastname: '',
-  // });
 
-  // const {
-  //   register,
-  //   control,
-  //   handleSubmit, 
-  //   formState: { errors }
-  // } = useForm<User>({
-  //   defaultValues: {
-  //     username: '',
-  //     password: '',
-  //     email: '',
-  //     phone: '',
-  //     firstname: '',
-  //     lastname: '',
-  //   }
-  // });
-
-
+ 
   useEffect(() => {
     setShowWelcomeModal(true);
     setShowUserFormModal(true);
   },[]);
   
-  const handleNextModals = () => {
-  };
-
-
   return (
     <>
       <WelcomeModal showWelcomeModal={showWelcomeModal} setShowWelcomeModal={setShowWelcomeModal}/>

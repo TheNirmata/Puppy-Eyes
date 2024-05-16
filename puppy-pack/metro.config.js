@@ -7,33 +7,14 @@ const config = getDefaultConfig(__dirname, {
 
   // [Web-only]: Enables CSS support in Metro.
 
+  // This is required to load CSS files in the application.
   isCSSEnabled: true,
-
+  transformer: {
+    babelTransformerPath: require.resolve('react-native-svg-transformer')
+  }
+  
 })
-// add nice web support with optimizing compiler + CSS extraction
+module.exports = config
 
-const { withTamagui } = require('@tamagui/metro-plugin')
 
-module.exports = withTamagui(config, {
 
-  components: ['tamagui'],
-
-  config: './tamagui.config.ts',
-
-  outputCSS: './tamagui-web.css',
-},
-async () => {
-  const {
-    resolver: { sourceExts, assetExts },
-  } = await getDefaultConfig();
-  return {
-    transformer: {
-      babelTransformerPath: require.resolve('react-native-svg-transformer'),
-    },
-    resolver: {
-      assetExts: assetExts.filter(ext => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg'],
-    },
-  };
-}
-)

@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, Image, TouchableOpacity } from 'react-native';
 import { useForm, Controller } from "react-hook-form"
 import tw from 'twrnc';
@@ -11,11 +11,26 @@ import  { UserContext }  from '../../context/userContext';
 const GoogleIcon = require('../../assets/icon-buttons/icons8-google-96.png');
 const AppleIcon = require('../../assets/icon-buttons/apple-icon.png');
 import wolfPackGif from '../../assets/wolf-pack.gif';
+import { IP_ADDRESS } from '@env'
 
 
 export default function LoginScreen({ navigation }) {
   const { user, setUser, handleLogin } = useContext(UserContext);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
+
+  useEffect(() => {
+    fetch(`http://${IP_ADDRESS}:8000/PuppyApi/woof/`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+      .then(response => response.json())
+      .then(data => console.log(`connected to django`))
+      .catch(error => console.error(`ERROR >>: ${error}`));
+  },[]);
 
   const {
     register,
